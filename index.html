@@ -29,6 +29,11 @@
     --blush-deep:#D77FA1;
     --ivory:#F8F4E9;
     --ink:#0E1E17;
+    --palette-magenta:#FD057F;
+    --palette-pink:#FE84C1;
+    --palette-white:#FDECFF;
+    --palette-green:#11BD2B;
+    --palette-teal:#01905A;
     --line: rgba(198,162,77,0.35);
   }
 
@@ -137,10 +142,16 @@
   }
   .hero-venue{margin-top:6px; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; color:rgba(248,244,233,0.8);}
 
-  .countdown{display:flex; gap:22px; justify-content:center; margin-top:46px; flex-wrap:wrap;}
+  .countdown{display:flex; gap:22px; justify-content:center; margin-top:46px; flex-wrap:nowrap;}
   .countdown div{min-width:78px;}
   .countdown .num{font-family:'Wicked',serif; font-size:2.2rem; color:var(--emerald-glow); display:block;}
   .countdown .cd-label{font-family:'Jost',sans-serif; font-size:0.72rem; letter-spacing:0.12em; color:rgba(248,244,233,0.65);}
+  @media (max-width:480px){
+    .countdown{gap:10px;}
+    .countdown div{min-width:0; flex:1 1 0;}
+    .countdown .num{font-size:1.5rem;}
+    .countdown .cd-label{font-size:0.6rem; letter-spacing:0.08em;}
+  }
 
   .hero-scroll{
     position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
@@ -158,8 +169,8 @@
   }
   .intro-copy{max-width:600px; margin:20px auto 0; color:rgba(248,244,233,0.82); font-size:1.08rem;}
 
-  .bg-green{background:linear-gradient(180deg, var(--emerald-black), var(--emerald-deep) 50%, var(--emerald-black));}
-  .bg-pink{background:linear-gradient(180deg, var(--emerald-black), #3B1229 50%, var(--emerald-black));}
+  .bg-green{background:linear-gradient(180deg, var(--emerald-black) 0%, rgba(17,189,43,0.22) 38%, rgba(1,144,90,0.42) 62%, var(--emerald-black) 100%);}
+  .bg-pink{background:linear-gradient(180deg, var(--emerald-black) 0%, rgba(253,5,127,0.26) 38%, rgba(254,132,193,0.24) 62%, var(--emerald-black) 100%);}
 
   /* ---------- event / venue ---------- */
   .venue-grid{display:grid; grid-template-columns:1fr 1fr; gap:34px; margin-top:56px;}
@@ -226,8 +237,8 @@
     background:rgba(8,26,19,0.4);
   }
   .swatch .chip{width:100%; height:96px; border-radius:3px; margin-bottom:18px; border:1px solid rgba(0,0,0,0.2);}
-  .chip.green{background:linear-gradient(150deg,#2F7A57,#0C3B29);}
-  .chip.pink{background:linear-gradient(150deg,#F0B8CC,#D77FA1);}
+  .chip.green{background:linear-gradient(150deg,var(--palette-green),var(--palette-teal));}
+  .chip.pink{background:linear-gradient(150deg,var(--palette-pink),var(--palette-magenta));}
   .swatch h4{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.2rem; margin:0 0 6px; color:var(--ivory);}
   .swatch p{margin:0; font-size:0.92rem; color:rgba(248,244,233,0.68);}
   .attire-note{max-width:560px; margin:30px auto 0; text-align:center; color:rgba(248,244,233,0.75); font-style:italic;}
@@ -273,7 +284,7 @@
   footer{
     text-align:center; padding:46px 24px; border-top:1px solid var(--line);
     font-family:'Jost',sans-serif; font-size:0.78rem; letter-spacing:0.04em; color:rgba(248,244,233,0.45);
-    background:linear-gradient(180deg, var(--emerald-black), #3B1229);
+    background:linear-gradient(180deg, var(--emerald-black), rgba(253,5,127,0.22));
   }
   footer a{color:var(--gold-soft); text-decoration:none;}
 </style>
@@ -339,14 +350,8 @@
     </div>
 
     <div class="map-block">
-      <iframe
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=Taal+Vista+Hotel,+Km+60+Aguinaldo+Highway,+Tagaytay+City,+Cavite,+Philippines&output=embed"
-        title="Map to Taal Vista Hotel, Tagaytay">
-      </iframe>
-      <div class="map-footer">
-        <div style="text-align:left;">
+      <div class="map-footer" style="border-top:none; flex-direction:column; justify-content:center; text-align:center; gap:18px;">
+        <div style="text-align:center;">
           <p>Taal Vista Hotel</p>
           <span>Km 60, Aguinaldo Highway, Tagaytay City, Cavite 4120</span>
         </div>
@@ -564,7 +569,7 @@
 
 <footer>
   With love, Al &amp; JM · January 9, 2027 · Taal Vista Hotel, Tagaytay<br>
-  Website by <a href="#" target="_blank" rel="noopener">Love, Anne</a>
+  Website by <a href="https://tiktok.com/@loveanne.ph" target="_blank" rel="noopener">Love, Anne</a>
 </footer>
 
 <script>

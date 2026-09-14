@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Al &amp; JM — January 9, 2027</title>
-<meta name="description" content="The wedding of Al Gatmaitan and JM Duro — January 9, 2027, Taal Vista Hotel, Tagaytay">
+<meta name="description" content="The wedding of Al Gatmaitan and JM Duro — January 9, 2027, Taal Vista Hotel, Lake Wing, Tagaytay">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -287,6 +287,41 @@
     background:linear-gradient(180deg, var(--emerald-black), rgba(253,5,127,0.22));
   }
   footer a{color:var(--gold-soft); text-decoration:none;}
+
+  /* ---------- music toggle ---------- */
+  .music-toggle{
+    position:fixed; bottom:26px; right:26px; z-index:70;
+    width:58px; height:58px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--emerald-mid), var(--emerald-black));
+    border:1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; user-select:none;
+    box-shadow:0 0 18px rgba(198,162,77,0.35), 0 4px 14px rgba(0,0,0,0.45);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .music-toggle:hover{transform:scale(1.07); box-shadow:0 0 26px rgba(198,162,77,0.5), 0 4px 14px rgba(0,0,0,0.45);}
+  .music-toggle svg{width:19px; height:19px; fill:var(--gold-soft); position:relative; z-index:2;}
+  .music-toggle #iconPause{display:none;}
+  .music-toggle.playing #iconPlay{display:none;}
+  .music-toggle.playing #iconPause{display:block;}
+  .music-ring{
+    position:absolute; inset:-7px; border-radius:50%;
+    border:1px dashed var(--gold); opacity:0;
+  }
+  .music-toggle.playing .music-ring{opacity:0.75; animation:spinRing 7s linear infinite;}
+  @keyframes spinRing{from{transform:rotate(0deg);} to{transform:rotate(360deg);}}
+  .music-label{
+    position:absolute; right:70px; top:50%; transform:translateY(-50%);
+    font-family:'Jost',sans-serif; font-size:0.72rem; letter-spacing:0.08em; color:var(--gold-soft);
+    background:rgba(8,26,19,0.9); border:1px solid var(--line); border-radius:3px;
+    padding:6px 12px; white-space:nowrap;
+    opacity:0; pointer-events:none; transition:opacity .2s ease;
+  }
+  .music-toggle:hover .music-label{opacity:1;}
+  @media (max-width:640px){
+    .music-toggle{width:50px; height:50px; bottom:18px; right:18px;}
+    .music-label{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -314,7 +349,7 @@
     <div class="hero-eyebrow">The Ceremonial Union of</div>
     <h1 class="hero-names">Al<span class="hero-amp">&amp;</span>JM</h1>
     <div class="hero-date">January 9, 2027 · 4:00 PM</div>
-    <div class="hero-venue">Taal Vista Hotel, Tagaytay</div>
+    <div class="hero-venue">Taal Vista Hotel, Lake Wing — Tagaytay</div>
 
     <div class="countdown" id="countdown">
       <div><span class="num" id="cd-days">--</span><span class="cd-label">days</span></div>
@@ -337,13 +372,13 @@
     <div class="venue-grid">
       <div class="venue-card">
         <div class="label">Ceremony</div>
-        <h3>Taal Vista Hotel — Veranda</h3>
+        <h3>Taal Vista Hotel, Lake Wing — Veranda</h3>
         <p>Exchange of Vows and Blessings from Sponsors/Ninongs/Ninangs</p>
         <div class="venue-time">4:00 PM</div>
       </div>
       <div class="venue-card">
         <div class="label">Reception</div>
-        <h3>Taal Vista Hotel — Ballroom</h3>
+        <h3>Taal Vista Hotel, Lake Wing — Ballroom</h3>
         <p>Dinner, program &amp; celebration</p>
         <div class="venue-time">6:15 PM</div>
       </div>
@@ -352,10 +387,10 @@
     <div class="map-block">
       <div class="map-footer" style="border-top:none; flex-direction:column; justify-content:center; text-align:center; gap:18px;">
         <div style="text-align:center;">
-          <p>Taal Vista Hotel</p>
+          <p>Taal Vista Hotel, Lake Wing</p>
           <span>Km 60, Aguinaldo Highway, Tagaytay City, Cavite 4120</span>
         </div>
-        <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Taal+Vista+Hotel,+Km+60+Aguinaldo+Highway,+Tagaytay+City,+Cavite,+Philippines" target="_blank" rel="noopener">Get directions</a>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Taal+Vista+Hotel+Lake+Wing,+Km+60+Aguinaldo+Highway,+Tagaytay+City,+Cavite,+Philippines" target="_blank" rel="noopener">Get directions</a>
       </div>
     </div>
   </div>
@@ -574,8 +609,18 @@
   </div>
 </section>
 
+<div id="musicToggle" class="music-toggle" role="button" tabindex="0" aria-label="Play or pause wedding music">
+  <div class="music-ring"></div>
+  <span class="music-label" id="musicLabel">Play our song</span>
+  <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <svg id="iconPause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+</div>
+<div style="position:fixed; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none;">
+  <div id="yt-player"></div>
+</div>
+
 <footer>
-  With love, Al &amp; JM · January 9, 2027 · Taal Vista Hotel, Tagaytay<br>
+  With love, Al &amp; JM · January 9, 2027 · Taal Vista Hotel, Lake Wing, Tagaytay<br>
   Website by <a href="https://tiktok.com/@loveanne.ph" target="_blank" rel="noopener">Love, Anne</a>
 </footer>
 
@@ -622,6 +667,49 @@
       b.style.animationDuration = (10 + Math.random() * 8) + 's';
       field.appendChild(b);
     }
+  })();
+  // background music — YouTube IFrame API, toggled by the floating button
+  (function(){
+    var toggleBtn = document.getElementById('musicToggle');
+    var musicLabel = document.getElementById('musicLabel');
+    var ytPlayer = null;
+    var apiReady = false;
+
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+
+    window.onYouTubeIframeAPIReady = function(){
+      ytPlayer = new YT.Player('yt-player', {
+        height: '0',
+        width: '0',
+        videoId: 'amgPXKrFZVg',
+        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: 'amgPXKrFZVg' },
+        events: {
+          onReady: function(){ apiReady = true; },
+          onStateChange: function(e){
+            if (e.data === YT.PlayerState.PLAYING){
+              toggleBtn.classList.add('playing');
+              musicLabel.textContent = 'Pause our song';
+            } else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED){
+              toggleBtn.classList.remove('playing');
+              musicLabel.textContent = 'Play our song';
+            }
+          }
+        }
+      });
+    };
+
+    function toggleMusic(){
+      if (!apiReady || !ytPlayer || typeof ytPlayer.getPlayerState !== 'function') return;
+      var state = ytPlayer.getPlayerState();
+      if (state === 1){ ytPlayer.pauseVideo(); } else { ytPlayer.playVideo(); }
+    }
+
+    toggleBtn.addEventListener('click', toggleMusic);
+    toggleBtn.addEventListener('keypress', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleMusic(); }
+    });
   })();
 </script>
 
